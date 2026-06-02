@@ -19,10 +19,8 @@ def semantic_search(query: str, limit: int = 5) -> list[dict]:
                 "index": VECTOR_INDEX_NAME,
                 "path": "plot_embedding",
                 "queryVector": query_vector,
-                # numCandidates must be > limit: more candidates = better
-                # recall in the approximate (HNSW/aNN) search, at some latency cost.
-                "numCandidates": 150,
-                "limit": limit,
+                "numCandidates": max(150, limit * 10),
+                "limit": limit + 10,
             }
         },
         {
@@ -34,8 +32,21 @@ def semantic_search(query: str, limit: int = 5) -> list[dict]:
             }
         },
     ]
-    return list(collection.aggregate(pipeline))
 
+    results = list(collection.aggregate(pipeline))
+    seen_titles = set()
+    final_results = []
+
+    for movie in results:
+        title = movie.get("title")
+        if title not in seen_titles:
+            seen_titles.add(title)
+            final_results.append(movie)
+
+        if len(final_results) == limit:
+            break
+
+    return final_results
 
 if __name__ == "__main__":
     q = sys.argv[1] if len(sys.argv) > 1 else "space movies where humanity is in danger"

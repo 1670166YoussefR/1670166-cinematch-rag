@@ -1,4 +1,4 @@
-# demo.md — `<grup>`
+# demo.md — `<1670166>`
 
 Aquest fitxer és **obligatori**. Conté dues parts:
 
@@ -14,17 +14,46 @@ Aquest fitxer és **obligatori**. Conté dues parts:
 Comanda executada:
 
 ```bash
-uv run python -m src.n1_semantic_search "_____"
+uv run python -m src.n1_semantic_search "space movies where humanity is in danger"
 ```
 
 Sortida real (top-5 pel·lícules amb `vectorSearchScore`):
 
 ```
-_____
+0.9381  (1979)  Buck Rogers in the 25th Century
+0.9341  (2000)  Titan A.E.
+0.9302  (1986)  Aliens
+0.9275  (1984)  V: The Final Battle
+0.9272  (1983)  Space Raiders
 ```
 
-(Repetiu amb 3 queries diferents per demostrar que funciona; almenys una ha de
-ser semàntica — sense la paraula clau literal al títol.)
+```bash
+uv run python -m src.n1_semantic_search "romantic movies about impossible love"
+```
+
+Sortida real (top-5 pel·lícules amb `vectorSearchScore`):
+
+```
+0.9231  (1989)  Always
+0.9201  (2009)  The Time Traveler's Wife
+0.9171  (2012)  Ruby Sparks
+0.9161  (1964)  Frosty
+0.9132  (2004)  Hulchul
+```
+
+```bash
+uv run python -m src.n1_semantic_search "crime movies with detectives and murder investigations"
+```
+
+Sortida real (top-5 pel·lícules amb `vectorSearchScore`):
+
+```
+0.9350  (2012)  Alex Cross
+0.9332  (1989)  Kill Me Again
+0.9331  (2008)  Righteous Kill
+0.9328  (1984)  City Heat
+0.9315  (1998)  Snake Eyes
+```
 
 ### N2 — RAG (si arribeu)
 
@@ -84,10 +113,11 @@ breus i precisos.
 
 ### Q1 · Què passa si embeus la query amb `text-embedding-3-small` en lloc d'`ada-002`?
 
-_____
+La cerca no funcionaria correctament perquè la query i les pel·lícules estarien embeddings amb models diferents. Per obtenir bons resultats, tots dos han d'utilitzar el mateix model.
 
 ### Q2 · Per què `numCandidates` ha de ser > `limit`? Què passa si poses `numCandidates == limit`?
 
+numCandidates ha de ser mes gran que limit ja que MongoDB no retorna titols buits, sino que llança un error directament. Si el valor de numCandidates fos igual a limit, es te menys marge per fer la cerca i podrien empitjorar els resultats.
 _____
 
 ### Q3 · Si el `$vectorSearch` NO troba res rellevant, què retorna el teu RAG? Per què?
