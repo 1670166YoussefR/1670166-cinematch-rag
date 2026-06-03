@@ -20,7 +20,14 @@ def semantic_search(query: str, limit: int = 5) -> list[dict]:
                 "path": "plot_embedding",
                 "queryVector": query_vector,
                 "numCandidates": max(150, limit * 10),
-                "limit": limit + 10,
+                "limit": limit * 3,
+            }
+        },
+        {
+            "$match": {
+                "plot": {
+                    "$exists": True,
+                }
             }
         },
         {
