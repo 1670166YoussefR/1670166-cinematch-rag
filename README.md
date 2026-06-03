@@ -5,8 +5,8 @@ Llegiu el repte complet a **[`enunciat_mini_agentic_rag.pdf`](enunciat_mini_agen
 rúbrica d'avaluació a **[`rubrica_niveles.md`](rubrica_niveles.md)**. Aquesta
 plantilla us dóna un **N1 funcional**; construïu N2 → N4 a sobre.
 
-> **Grup:** `_____` · **Membres:** `_____`
-> **Nivell màxim assolit:** `N_` (actualitzeu abans del lliurament)
+> **Grup:** `1670166` · **Membres:** `Youssef Rabouz`
+> **Nivell màxim assolit:** `N2` (actualitzeu abans del lliurament)
 
 ---
 
@@ -194,15 +194,14 @@ a corregir sense buscar res:
 # PLAB CineMatch-RAG — Grup <NIU_lider>
 
 ## Membres del grup
-- <NIU_1> · <Nom i Cognoms> · GitHub user @<...>
-- <NIU_2> · <Nom i Cognoms> · GitHub user @<...>   (si parella)
+- <1670166> · <Youssef Rabouz> · GitHub user @<1670166YoussefR>
 
 ## Repositori
-URL: https://github.com/<owner>/<NIU_lider>-cinematch-rag
+URL: https://github.com/1670166YoussefR/1670166-cinematch-rag
 Col·laborador "albertgilopez" afegit i acceptat: SÍ / NO
 
 ## Nivell màxim assolit (auto-declarat)
-N1 / N2 / N3 / N4
+N1 / *N2* / N3 / N4
 
 ## Últim /validate executat (opcional però recomanat)
 Job ID: val_xxxxxxxx     (del missatge del bot PROFE)

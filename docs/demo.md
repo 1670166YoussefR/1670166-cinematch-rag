@@ -59,15 +59,23 @@ Sortida real (top-5 pel·lícules amb `vectorSearchScore`):
 
 **Cas positiu** (resposta basada al context):
 
-- Query: `_____`
-- Top-k títols recuperats: `_____`
-- Resposta de l'LLM (ha de citar títols): `_____`
+- Query: `space movies where humanity is in danger`
+- Top-k títols recuperats: `Buck Rogers in the 25th Century, Titan A.E., Aliens, V: The Final Battle, Space Raiders`
+- Resposta de l'LLM (ha de citar títols): 
+`Here are some space movies where humanity is in danger based on the provided context:
+
+1. **Buck Rogers in the 25th Century** - Earth is threatened by alien invaders.
+2. **Titan A.E.** - A young man must find a hidden Earth ship to secure the survival of humanity against an enemy alien species.
+3. **Aliens** - A rescue team faces the challenge of contact loss on a colonized planet, with uncertain outcomes.
+4. **V: The Final Battle** - Human resistance fighters are engaged in a guerilla war against genocidal extra-terrestrials dominating Earth.
+
+I don't think "Space Raiders" specifically fits the theme of humanity being in danger based on the context provided.`
 
 **Cas negatiu** (sense context → ha de dir "no ho sé"):
 
-- Query: `_____`
-- Resposta esperada: `_____`
-- Resposta obtinguda: `_____`
+- Query: `How can i pass the ATS subject?`
+- Resposta esperada: `I don't know based on the provided context.`
+- Resposta obtinguda: `I don't know based on the provided context.`
 
 ### N3 — Tools + Structured Outputs (si arribeu)
 
@@ -118,11 +126,10 @@ La cerca no funcionaria correctament perquè la query i les pel·lícules estari
 ### Q2 · Per què `numCandidates` ha de ser > `limit`? Què passa si poses `numCandidates == limit`?
 
 numCandidates ha de ser mes gran que limit ja que MongoDB no retorna titols buits, sino que llança un error directament. Si el valor de numCandidates fos igual a limit, es te menys marge per fer la cerca i podrien empitjorar els resultats.
-_____
 
 ### Q3 · Si el `$vectorSearch` NO troba res rellevant, què retorna el teu RAG? Per què?
 
-_____
+Si el $vectorSearch no troba res rellevant, el meu RAG retorna "I don't know based on the provided context.". Això passa perquè el prompt indica que només pot utilitzar la informació proporcionada i que no ha d'inventar res ni utilitzar informació externa
 
 ### Q4 · Per què trieu `cosine` i NO `euclidean` / `dotProduct`?
 

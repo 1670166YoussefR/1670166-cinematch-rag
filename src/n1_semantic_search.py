@@ -28,6 +28,8 @@ def semantic_search(query: str, limit: int = 5) -> list[dict]:
                 "_id": 0,
                 "title": 1,
                 "year": 1,
+                "plot": 1,
+                "genres": 1,
                 "score": {"$meta": "vectorSearchScore"},
             }
         },
