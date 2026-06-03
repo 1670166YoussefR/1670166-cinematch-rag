@@ -121,19 +121,19 @@ breus i precisos.
 
 ### Q1 · Què passa si embeus la query amb `text-embedding-3-small` en lloc d'`ada-002`?
 
-La cerca no funcionaria correctament perquè la query i les pel·lícules estarien embeddings amb models diferents. Per obtenir bons resultats, tots dos han d'utilitzar el mateix model.
+La cerca no funcionaria correctament perquè la query i les pel·lícules estarien embeddings amb models diferents. Encara que els vectors tinguin la mateixa dimensió, pertanyen a espais semàntics diferents. Per obtenir bons resultats, tots dos han d'utilitzar exactament el mateix model.
 
 ### Q2 · Per què `numCandidates` ha de ser > `limit`? Què passa si poses `numCandidates == limit`?
 
-numCandidates ha de ser mes gran que limit ja que MongoDB no retorna titols buits, sino que llança un error directament. Si el valor de numCandidates fos igual a limit, es te menys marge per fer la cerca i podrien empitjorar els resultats.
+numCandidates ha de ser més gran que limit perquè MongoDB pugui avaluar més candidats abans de seleccionar els resultats finals. Si numCandidates = limit, la cerca serà menys precisa i podria perdre documents rellevants.
 
 ### Q3 · Si el `$vectorSearch` NO troba res rellevant, què retorna el teu RAG? Per què?
 
-Si el $vectorSearch no troba res rellevant, el meu RAG retorna "I don't know based on the provided context.". Això passa perquè el prompt indica que només pot utilitzar la informació proporcionada i que no ha d'inventar res ni utilitzar informació externa
+Si el $vectorSearch no troba res rellevant, el meu RAG retorna "I don't know based on the provided context.". Això passa perquè a la funció ask() hi ha un control defensiu amb if not movies, que evita construir un prompt buit i evita que el model inventi informació.
 
 ### Q4 · Per què trieu `cosine` i NO `euclidean` / `dotProduct`?
 
-_____
+S'ha utilitzat cosine perque es la metrica estandard per comparar embeddings de text i obtenir resultats semànticament similars. dotProduct serveix per comparar vectors normalitzats i euclidean serveix per comparar distàncies geometriques.
 
 ### Q5 (trieu UNA segons el vostre nivell màxim)
 
@@ -141,4 +141,4 @@ _____
 
 **Si heu arribat fins a N3 o inferior:** Per què la sortida estructurada (JSON schema) val més que una resposta en text lliure? Posa un exemple concret on un text lliure us hauria fallat.
 
-_____
+La sortida estructurada mitjançant un JSON schema és més fiable que una resposta en text lliure perquè garanteix un format consistent i fàcil de processar per altres aplicacions. En canvi, una resposta en text lliure pot variar en cada execució i ser difícil d'interpretar automàticament.
