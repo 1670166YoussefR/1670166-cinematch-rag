@@ -12,7 +12,7 @@ def build_prompt(question: str, movies: list[dict]) -> list[str]:
         context += (
             f"Title: {movie['title']}\n"
             f"Year: {movie['year']}\n"
-            f"Plot: {movie.get('plot', 'No plot available')}\n\n"
+            f"Plot: {movie.get('plot')}\n\n"
         )
 
     prompt = [
