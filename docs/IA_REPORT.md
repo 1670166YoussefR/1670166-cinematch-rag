@@ -20,6 +20,8 @@ sapigueu explicar.**
 |03/06|Li demano que m'expliqui els diferents rols que existeixen per poder tenir una idea|M'explica cada rol.|He llegit que tingui sentit la explicació de cada rol buscant a internet|
 |03/06|Li torno a pasar el codi del build_prompt|Em diu que hauria de separar instruccions estatiques de instruccions dinamiques i assignarli un rol a cada una|Verifico que aixo es veritat ja que les instruccions estatiques les hauria de pasar per system i les dinamiques les hauria de pasar per user|
 |03/06|Em pregunta quin seria el prompt defensiu|Li paso les linies de codi que fant que el prompt sigui defensiu en cas de una pregunta fora de context|Comprovo executant n2_rag|
+|03/06|Li pregunto perque podria fallar C3 en el N2|Em respon dient que pot ser que comprovi el comportament rellevant quan vectorSearch no troba res |Miro el meu codi i realment no tinc cap comprobador en el cas de que el vectorSearch no retorni res|
+
 
 > Afegiu una fila per cada interacció substantiva amb PROFE. Si no hi ha
 > interaccions, escriviu "Cap consulta a PROFE durant el desenvolupament".

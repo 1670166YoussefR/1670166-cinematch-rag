@@ -23,7 +23,7 @@ def build_prompt(question: str, movies: list[dict]) -> list[str]:
     "I don't know based on the provided context.\n"
     "Do not invent movies or use external knowledge.\n\n",
     f"Context:\n{context}\n\n"
-    f"Question: {question}\n\n"
+    f"Question: \n{question}\n\n"
     ]
 
     return prompt
@@ -47,6 +47,9 @@ def generate_answer(prompt: list[str]) -> str:
 
 def ask(question: str) -> str:
     movies = retrieve_context(question)
+
+    if not movies:
+        return "I don't know based on the provided context."
 
     prompt = build_prompt(
         question,
