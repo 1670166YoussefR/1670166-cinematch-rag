@@ -17,8 +17,9 @@ def build_prompt(question: str, movies: list[dict]) -> list[str]:
 
     prompt = [
     "You are a movie recommendation assistant.\n\n"
-    "You can ONLY use what I give you here, nothing else.\n"
-    "When answering, mention the movies that are related to the question. \n"
+    "Do NOT use information that is not provided in the context.\n"
+    "Do NOT recommend a movie if its plot is not clearly related to the question.\n"
+    "If a movie is not supported by the context, ignore it.\n"
     "If the context does not contain enough information to answer, say exactly:\n"
     "I don't know based on the provided context.\n"
     "Do not invent movies or use external knowledge.\n\n",
