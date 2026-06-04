@@ -125,7 +125,7 @@ La cerca no funcionaria correctament perquè la query i les pel·lícules estari
 
 ### Q2 · Per què `numCandidates` ha de ser > `limit`? Què passa si poses `numCandidates == limit`?
 
-numCandidates ha de ser més gran que limit perquè MongoDB pugui avaluar més candidats abans de seleccionar els resultats finals. Si numCandidates = limit, la cerca serà menys precisa i podria perdre documents rellevants.
+numCandidates ha de ser més gran que limit perquè MongoDB utiltiza un algorisme Approximate Nearest Neighbors (ANN), que agafa un conjunt de candidats i escull els millors resultats. Si numCandidates = limit, es podrien descartar pelicules que en realitat son mes rellevants. Aixo redueix el recall de la cerca. Augmentar numCandidates permet considerar mes possibles veïns i millorar la qualitat, pero podria augmentar lleugerament la latència.
 
 ### Q3 · Si el `$vectorSearch` NO troba res rellevant, què retorna el teu RAG? Per què?
 
@@ -133,7 +133,7 @@ Si el $vectorSearch no troba res rellevant, el meu RAG retorna "I don't know bas
 
 ### Q4 · Per què trieu `cosine` i NO `euclidean` / `dotProduct`?
 
-S'ha utilitzat cosine perque es la metrica estandard per comparar embeddings de text i obtenir resultats semànticament similars. dotProduct serveix per comparar vectors normalitzats i euclidean serveix per comparar distàncies geometriques.
+S'ha utilitzat cosine perquè mesura la similitud semàntica comparant l'angle entre vectors i és independent de la seva magnitud. Els embeddings d'OpenAI estan normalitzats, de manera que cosine i dotProduct donen pràcticament els mateixos resultats. En canvi, euclidean mesura distàncies geomètriques i és menys adequada per comparar significat semàntic en embeddings de text.
 
 ### Q5 (trieu UNA segons el vostre nivell màxim)
 
@@ -141,4 +141,4 @@ S'ha utilitzat cosine perque es la metrica estandard per comparar embeddings de 
 
 **Si heu arribat fins a N3 o inferior:** Per què la sortida estructurada (JSON schema) val més que una resposta en text lliure? Posa un exemple concret on un text lliure us hauria fallat.
 
-La sortida estructurada mitjançant un JSON schema és més fiable que una resposta en text lliure perquè garanteix un format consistent i fàcil de processar per altres aplicacions. En canvi, una resposta en text lliure pot variar en cada execució i ser difícil d'interpretar automàticament.
+La sortida estructurada mitjançant un JSON schema és més fiable que una resposta en text lliure perquè garanteix un format consistent i fàcil de processar automàticament. Per exemple, si una aplicació espera rebre el títol d'una pel·lícula en un camp "title", amb un JSON schema sempre obtindrà una estructura com {"title":"Pitufos"}. En canvi, amb text lliure el model podria respondre "Et recomano Pitufos" o "La millor opció és Pitufos", fent més difícil extreure la informació de forma fiable.
