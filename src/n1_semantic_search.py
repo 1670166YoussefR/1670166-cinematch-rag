@@ -47,10 +47,11 @@ def semantic_search(query: str, limit: int = 5) -> list[dict]:
     final_results = []
 
     for movie in results:
-        title = movie.get("title")
-        if title not in seen_titles:
-            seen_titles.add(title)
-            final_results.append(movie)
+        if movie.get("score") >= 0.75:
+            title = movie.get("title")
+            if title not in seen_titles:
+                seen_titles.add(title)
+                final_results.append(movie)
 
         if len(final_results) == limit:
             break
